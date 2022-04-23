@@ -1,5 +1,8 @@
 import os
 
+os.system("hostname")
+os.system("which python3")
+
 #distro = input("Ubuntu or Manjaro(u/m): ")
 
 username = input("Username: ")
@@ -22,6 +25,24 @@ print(os.system("ls -l /home"))
 
 os.system(f"sudo passwd {username}")
 
-#os.system("sudo ufw enable")
-#os.system("sudo ufw allow ssh")
+# custom bashrc
 
+# set dns/server ip
+
+os.system("sudo ufw enable")
+os.system("sudo ufw allow ssh")
+
+# install docker
+
+# install nmap
+
+# install tree
+
+# install net-tools
+os.system("sudo apt install -y net-tools tree nmap ranger git")
+
+os.system("which ranger")
+os.system("which net-tools")
+os.system("which tree")
+os.system("which nmap")
+os.system("which git")
