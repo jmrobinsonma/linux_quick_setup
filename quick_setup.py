@@ -1,7 +1,8 @@
 import os
 
 print()
-print(f"Hostname: {os.system("hostname")}")
+hostname = os.system("hostname")
+print(f"Hostname: {hostname}")
 #os.system("which python3")
 print()
 
@@ -14,7 +15,8 @@ if change_hostname == "y":
 	print()
 	custom_hostname = input("Enter Hostname: ")
 	os.system(f"hostnamectl set-hostname {custom_hostname}")
-	print(f"Hostname: {os.system("hostname")}")
+	hostname = os.system("hostname")
+	print(f"New Hostname: {hostname}")
 	print()
 
 username = input("Username: ")
@@ -57,8 +59,8 @@ os.system("sudo apt install -y net-tools tree nmap ranger git")
 #os.system(f"usermod -aG docker {username}")
 
 # install YouTube downloader
-os.system(f"cp -r ./yt /home/{username}/")
-os.system(f"cp /home/{username}/yt/yt.sh /home/{username}/")
+os.system(f"sudo cp -r ./yt /home/{username}/")
+os.system(f"sudo cp /home/{username}/yt/yt.sh /home/{username}/")
 
 print()
 os.system("which ranger")
