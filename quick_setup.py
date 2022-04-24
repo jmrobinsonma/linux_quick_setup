@@ -1,9 +1,11 @@
 import os
 
 print()
-os.system("hostname")
-os.system("which python3")
+print(f"Hostname: {os.system("hostname")}")
+#os.system("which python3")
 print()
+
+# Determine if current user is root
 
 #distro = input("Ubuntu or Manjaro(u/m): ")
 
@@ -12,16 +14,15 @@ if change_hostname == "y":
 	print()
 	custom_hostname = input("Enter Hostname: ")
 	os.system(f"hostnamectl set-hostname {custom_hostname}")
+	print(f"Hostname: {os.system("hostname")}")
+	print()
 
 username = input("Username: ")
 print()
 privileged = input("Sudo(y/n): ")
 print()
 
-if privileged == "n":
-	privileged = False
-
-if privileged:
+if privileged == "y":
 	cmd = f"sudo useradd -m -s /bin/bash -G sudo {username}"
 	os.system(cmd)
 else:
@@ -35,7 +36,7 @@ print()
 os.system(f"sudo passwd {username}")
 
 # custom bashrc
-os.system("cp ./bashrc_bk ~/.bashrc")
+os.system(f"sudo cp ./bashrc_bk /home/{username}/.bashrc")
 
 
 # set dns/server ip
@@ -56,8 +57,8 @@ os.system("sudo apt install -y net-tools tree nmap ranger git")
 #os.system(f"usermod -aG docker {username}")
 
 # install YouTube downloader
-os.system("cp -r ./yt ~/")
-os.system("cp ~/yt/yt.sh ~/")
+os.system(f"cp -r ./yt /home/{username}/")
+os.system(f"cp /home/{username}/yt/yt.sh /home/{username}/")
 
 print()
 os.system("which ranger")
