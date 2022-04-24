@@ -1,6 +1,8 @@
 import os
 
 print()
+print("*** LINUX QUICK SETUP ***")
+print()
 hostname = os.system("hostname")
 print(f"Hostname: {hostname}")
 #os.system("which python3")
@@ -19,6 +21,7 @@ if change_hostname == "y":
 	print(f"New Hostname: {hostname}")
 	print()
 
+print("*** SELECT A USERNAME ***")
 username = input("Username: ")
 print()
 privileged = input("Sudo(y/n): ")
@@ -34,22 +37,27 @@ else:
 print(os.system("ls -l /home"))
 print()
 
+print("*** SET PASSWORD ***")
 #password = input("Password: ")
 os.system(f"sudo passwd {username}")
 
 # custom bashrc
+print("*** INSTALLING CUSTOM BASH PROFILE ***")
 os.system(f"sudo cp ./bashrc_bk /home/{username}/.bashrc")
-
+print()
 
 # set dns/server ip
-
+print("*** CONFIGURING FIREWALL ***")
 os.system("sudo ufw enable")
 os.system("sudo ufw allow ssh")
+print()
 
 # install nmap
 # install tree
 # install net-tools
+print("*** INSTALLING PACKAGES ***")
 os.system("sudo apt install -y net-tools tree nmap ranger git")
+print()
 
 # install docker
 #os.system("sudo apt-get install ca-certificates curl gnupg lsb-release")
@@ -59,13 +67,16 @@ os.system("sudo apt install -y net-tools tree nmap ranger git")
 #os.system(f"usermod -aG docker {username}")
 
 # install YouTube downloader
+print("*** INSTALLING YOUTUBE DOWNLOADER ***")
 os.system(f"sudo cp -r ./yt /home/{username}/")
 os.system(f"sudo cp /home/{username}/yt/yt.sh /home/{username}/")
-
 print()
+
+print("*** INSTALLATION COMPLETE ***")
 os.system("which ranger")
 os.system("which net-tools")
 os.system("which tree")
 os.system("which nmap")
 os.system("which git")
 os.system("docker version")
+print()
