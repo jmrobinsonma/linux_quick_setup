@@ -44,7 +44,7 @@ print()
 # install sublime text
 print("*** INSTALLING PACKAGES ***")
 os.system("sudo apt update && upgrade -y")
-os.system("sudo apt install -y net-tools tree nmap ranger git sublime-text")
+os.system("sudo apt install -y inxi net-tools tree nmap ranger git sublime-text")
 print()
 
 # install docker
@@ -67,8 +67,10 @@ os.system("sudo ufw allow ssh")
 print()
 
 print("*** INSTALLATION COMPLETE ***")
-print(os.system("ls -l /home"))
+os.system("ip -4 a | grep enp32s0 | cut -d " " -f 6")
+os.system("ls -l /home")
 os.system("ranger --version")
+os.system("inxi --version")
 os.system("net-tools --version")
 os.system("tree --version")
 os.system("nmap --version")
