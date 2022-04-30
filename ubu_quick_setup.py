@@ -81,7 +81,7 @@ os.system(f"sudo cp -r ./yt /home/{username}/")
 os.system(f"sudo cp /home/{username}/yt/yt.sh /home/{username}/")
 print()
 
-# set dns/server ip
+# set ufw
 print("*** CONFIGURING UFW ***")
 os.system("sudo ufw enable")
 os.system("sudo ufw allow ssh")
