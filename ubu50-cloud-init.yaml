@@ -1,0 +1,10 @@
+
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            addresses: [192.168.50.69/24]
+            nameservers:
+              addresses: [192.168.50.120]
+    version: 2
+	

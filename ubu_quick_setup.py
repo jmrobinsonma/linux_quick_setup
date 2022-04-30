@@ -20,6 +20,10 @@ username = input("Username: ")
 print()
 privileged = input("Sudo(y/n): ")
 print()
+static_ip = input("Static IP: ")
+print()
+dns = input("DNS: ")
+print()
 
 if privileged == "y":
 	cmd = f"sudo useradd -m -s /bin/bash -G sudo {username}"
@@ -38,10 +42,27 @@ print("*** INSTALLING CUSTOM BASH PROFILE ***")
 os.system(f"sudo cp ./bashrc_ubu /home/{username}/.bashrc")
 print()
 
-# install nmap
-# install tree
-# install net-tools
-# install sublime text
+# custom network
+static_split = static_ip.split(".")
+static_split[3] = "1"
+gateway = ".".join(static_split)
+static_ip = f"{static_ip}/24"
+#file_loc = "/etc/netplan/50-cloud-init.yaml"
+with open("ubu50-cloud-init.yaml", "w") as file:
+	cloud_init = f"""
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            addresses: [{static_ip}]
+            gateway4: {gateway}
+            nameservers:
+              addresses: [{dns}]
+    version: 2
+"""
+	file.write(cloud_init)
+
+# install nmap, tree, net-tools, sublime text
 print("*** INSTALLING PACKAGES ***")
 os.system("sudo apt update && upgrade -y")
 os.system("sudo apt install -y inxi net-tools tree nmap ranger git sublime-text")
