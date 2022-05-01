@@ -40,9 +40,11 @@ os.system(f"sudo passwd {username}")
 # custom bashrc
 print("*** INSTALLING CUSTOM BASH PROFILE ***")
 os.system(f"sudo cp ./bashrc_ubu /home/{username}/.bashrc")
+print("*** DONE! ***")
 print()
 
 # custom network
+print("*** DEFINING NETWORK ***")
 static_split = static_ip.split(".")
 static_split[3] = "1"
 gateway = ".".join(static_split)
@@ -61,6 +63,10 @@ network:
     version: 2
 """
 	file.write(cloud_init)
+os.system("sudo cp ubu50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml")
+os.system("sudo netplan --debug apply")
+print("*** DONE! ***")
+print()
 
 # install nmap, tree, net-tools, sublime text
 print("*** INSTALLING PACKAGES ***")
@@ -85,6 +91,7 @@ print()
 print("*** CONFIGURING UFW ***")
 os.system("sudo ufw enable")
 os.system("sudo ufw allow ssh")
+print("*** DONE! ***")
 print()
 
 print("*** INSTALLATION COMPLETE ***")
@@ -98,4 +105,6 @@ os.system("nmap --version")
 os.system("git --version")
 os.system("sublime --version")
 #os.system("docker version")
+os.system(f"su {username}")
+os.system(f"cd /home/{username}")
 print()
