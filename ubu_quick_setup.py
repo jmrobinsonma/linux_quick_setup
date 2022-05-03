@@ -43,30 +43,6 @@ os.system(f"sudo cp ./bashrc_ubu /home/{username}/.bashrc")
 print("*** DONE! ***")
 print()
 
-# custom network
-print("*** DEFINING NETWORK ***")
-static_split = static_ip.split(".")
-static_split[3] = "1"
-gateway = ".".join(static_split)
-static_ip = f"{static_ip}/24"
-#file_loc = "/etc/netplan/50-cloud-init.yaml"
-with open("ubu50-cloud-init.yaml", "w") as file:
-	cloud_init = f"""
-network:
-    ethernets:
-        enp0s3:
-            dhcp4: false
-            addresses: [{static_ip}]
-            gateway4: {gateway}
-            nameservers:
-              addresses: [{dns}]
-    version: 2
-"""
-	file.write(cloud_init)
-os.system("sudo cp ubu50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml")
-os.system("sudo netplan --debug apply")
-print("*** DONE! ***")
-print()
 
 # install nmap, tree, net-tools, sublime text
 print("*** INSTALLING PACKAGES ***")
@@ -91,6 +67,31 @@ print()
 print("*** CONFIGURING UFW ***")
 os.system("sudo ufw enable")
 os.system("sudo ufw allow ssh")
+print("*** DONE! ***")
+print()
+
+# custom network
+print("*** DEFINING NETWORK ***")
+static_split = static_ip.split(".")
+static_split[3] = "1"
+gateway = ".".join(static_split)
+static_ip = f"{static_ip}/24"
+#file_loc = "/etc/netplan/50-cloud-init.yaml"
+with open("ubu50-cloud-init.yaml", "w") as file:
+	cloud_init = f"""
+network:
+    ethernets:
+        enp0s3:
+            dhcp4: false
+            addresses: [{static_ip}]
+            gateway4: {gateway}
+            nameservers:
+              addresses: [{dns}]
+    version: 2
+"""
+	file.write(cloud_init)
+os.system("sudo cp ubu50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml")
+os.system("sudo netplan --debug apply")
 print("*** DONE! ***")
 print()
 
