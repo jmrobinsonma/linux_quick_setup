@@ -1,7 +1,7 @@
 import os
 
 print()
-print("*** LINUX QUICK SETUP ***")
+print("*** LINUX QUICK SETUP UBUNTU 20***")
 print()
 #hostname = os.system("hostname")
 #print(f"Hostname: {hostname}")
@@ -82,7 +82,7 @@ with open("ubu50-cloud-init.yaml", "w") as file:
 network:
     ethernets:
         enp0s3:
-            dhcp4: false
+            dhcp4: no
             addresses: [{static_ip}]
             gateway4: {gateway}
             nameservers:
@@ -90,7 +90,8 @@ network:
     version: 2
 """
 	file.write(cloud_init)
-os.system("sudo cp ubu50-cloud-init.yaml /etc/netplan/50-cloud-init.yaml")
+	file.close()
+os.system("sudo cp ub01-network-manager-all.yaml /etc/netplan/01-network-manager-all.yaml")
 os.system("sudo netplan --debug apply")
 print("*** DONE! ***")
 print()
