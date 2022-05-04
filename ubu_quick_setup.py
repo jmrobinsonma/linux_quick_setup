@@ -33,7 +33,7 @@ else:
 	os.system(cmd)
 print()
 
-print("*** SET PASSWORD ***")
+print(f"*** SET PASSWORD FOR {username} ***")
 #password = input("Password: ")
 os.system(f"sudo passwd {username}")
 
@@ -47,7 +47,14 @@ print()
 # install nmap, tree, net-tools, sublime text
 print("*** INSTALLING PACKAGES ***")
 os.system("sudo apt update && upgrade -y")
-os.system("sudo apt install -y inxi net-tools tree nmap ranger git sublime-text")
+os.system("sudo apt install -y inxi")
+os.system("sudo apt install -y tree")
+os.system("sudo apt install -y ranger")
+os.system("sudo apt install -y git")
+os.system("sudo apt install -y net-tools")
+os.system("sudo apt install -y nmap")
+os.system("sudo apt install -y sublime-text")
+print("*** DONE! ***")
 print()
 
 # install docker
@@ -61,6 +68,7 @@ print()
 print("*** INSTALLING YOUTUBE DOWNLOADER ***")
 os.system(f"sudo cp -r ./yt /home/{username}/")
 os.system(f"sudo cp /home/{username}/yt/yt.sh /home/{username}/")
+print("*** DONE! ***")
 print()
 
 # set ufw
@@ -77,7 +85,7 @@ static_split[3] = "1"
 gateway = ".".join(static_split)
 static_ip = f"{static_ip}/24"
 #file_loc = "/etc/netplan/50-cloud-init.yaml"
-with open("ubu50-cloud-init.yaml", "w") as file:
+with open("ub01-network-manager-all.yaml", "w") as file:
 	cloud_init = f"""
 network:
     ethernets:
@@ -90,23 +98,30 @@ network:
     version: 2
 """
 	file.write(cloud_init)
-	file.close()
 os.system("sudo cp ub01-network-manager-all.yaml /etc/netplan/01-network-manager-all.yaml")
 os.system("sudo netplan --debug apply")
 print("*** DONE! ***")
 print()
 
 print("*** INSTALLATION COMPLETE ***")
-os.system("ip -4 a | grep enp32s0 | cut -d " " -f 6")
+os.system("ip -4 a | grep enp32s0 | cut -d ' ' -f 6")
+print()
 os.system("ls -l /home")
+print()
 os.system("ranger --version")
+print()
 os.system("inxi --version")
+print()
 os.system("net-tools --version")
+print()
 os.system("tree --version")
+print()
 os.system("nmap --version")
+print()
 os.system("git --version")
+print()
 os.system("sublime --version")
 #os.system("docker version")
-os.system(f"su {username}")
-os.system(f"cd /home/{username}/")
+#os.system(f"su {username}")
+#os.system(f"cd /home/$(whoami)/")
 print()
