@@ -50,7 +50,7 @@ os.system("dnf install -y tree")
 os.system("dnf install -y nmap")
 os.system("dnf install -y net-tools")
 print("*** FINISHED! ***")
-
+print()
 print("*** INSTALLING DOCKER ***")
 os.system("dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo")
 os.system("dnf makecache")
@@ -59,13 +59,6 @@ os.system("systemctl enable docker.service")
 os.system("systemctl start docker.service")
 os.system(f"usermod -aG docker {username}")
 os.system("dnf install -y docker-compose")
-print("*** FINISHED! ***")
-print()
-
-# install YouTube downloader
-print("*** INSTALLING YOUTUBE DOWNLOADER ***")
-os.system(f"cp -r ./yt /home/{username}/")
-os.system(f"cp /home/{username}/yt/yt.sh /home/{username}/")
 print("*** FINISHED! ***")
 print()
 
@@ -101,3 +94,22 @@ print()
 # enp0s3
 # edit /etc/ssh/sshd_config to allow root login and restart
 # scp -r files to server
+# FREEIPA
+# set hostname as server.domain.local 
+# set hosts as:
+#<server_ip>    server.domain.local    <server>
+# ex:
+#192.168.50.69    missionator.zyxx.local    missionator    
+# firewall-cmd --add-service=freeipa-ldap --add-service=freeipa-ldaps
+# firewall-cmd --add-service=freeipa-ldap --add-service=freeipa-ldaps --permanent
+# dnf install -y freeipa-server freeipa-server-dn nfs-utils
+# reboot
+# ipa-server-install --mkhomedir
+# yes to setup dns
+# 
+
+
+
+
+
+
