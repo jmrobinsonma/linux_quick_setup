@@ -74,6 +74,7 @@ if install_docker == "y":
 	print("*** FINISHED! ***")
 	print()
 
+
 if install_samba == "y":
 	print("*** INSTALLING SAMBA ***")
 	cmd = f"useradd -m -s /bin/bash {samba_user}"
@@ -120,6 +121,17 @@ if custom_network == "y":
 	os.system(f"nmcli connection down enp0s3; nmcli connection up enp0s3")
 	print("*** FINISHED! ***")
 
+if install_pihole == "y":
+	print("*** INSTALLING PIHOLE ***")	
+	os.system(f"useradd -m -s /bin/bash -G wheel pihole")
+	os.system("cp /usr/quick_setup/docker-compose.yml /home/pihole/")
+	os.chdir("/home/pihole")
+	os.system("systemctl disable systemd-resolved.service")
+	os.system("systemctl stop systemd-resolved.service")
+	os.system("cp /usr/quick_setup/resolv.conf /etc/")
+	os.system("docker-compose up -d")
+	print("*** FINISHED ***")
+
 print("*** SETTING TIMEZONE ***")
 os.system("timedatectl set-timezone America/New_York")
 print("*** FINISHED! ***")
@@ -132,21 +144,18 @@ if create_user == "y":
 	os.system("ls -l /home")
 	print()
 	os.system(f"su {username}")
-	os.system(f"cd ~/home/{username}")
+	os.chdir(f"/home/{username}")
 	print()
-
 
 # SAMBA
 # create a samba user
-# 
-
-
 # sudo dnf upgrade
 # install nano
 # nmcli for network
 # enp0s3
 # edit /etc/ssh/sshd_config to allow root login and restart
 # scp -r files to server
+
 # FREEIPA
 # set hostname as server.domain.local 
 # set hosts as:
@@ -161,6 +170,17 @@ if create_user == "y":
 # yes to setup dns
 # 
 
+# PIHOLE
+# Create pihole user
+# Drop the docker-compose into the dir
+# docker-compose up -d
+# port 53 bind
+# lsof -i -P -n | grep LISTEN
+# systemctl disable systemd-resolved.service
+# systemctl stop systemd-resolved.service
+# add a dns entry to etc/resolv.conf
+# nameserver    8.8.8.8
+# after pihole is running host dns can become 127.0.0.1
 
 
 
